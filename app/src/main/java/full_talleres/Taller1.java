@@ -28,13 +28,48 @@ public class Taller1 {
      devuelva el string "Error en la conversion"
     */
     
-    
+    public static String convertir_km_seg(int velocidad) {
+
+        try {
+            //declaración de vatiables y equivalencias
+            String resulado_km_met = "";
+            double velocidad_met_seg = 0;
+            double velocidad_met_hora = 0;
+            final double equiv_met_seg = 1000, equiv_met_hora = 3600000;
+
+            //se define el modelo para el cálculo
+            velocidad_met_seg = velocidad * equiv_met_seg;
+            velocidad_met_hora = velocidad * equiv_met_hora;
+
+            //resultado
+            resulado_km_met= velocidad_met_hora + "m/h" + velocidad_met_seg + "m/s";  
+            return resulado_km_met;
+
+        } 
+        
+        //mensaje en caso de error
+        catch (Exception e) {
+            return "Error en la conversión";
+        }
+    }
 
     /*3. Diseñe un algoritmo e implemente la función Convertir_cm_lt que: reciba una cantidad double expresada en 
     cc (centímetros cúbicos) y devuelva un float con su equivalente en litros. Si hay algún error, retorne 0.
     */
   
-    
+    public static float Convertir_cm_lt (double centímetros_cub){
+ 
+        try {
+            
+         float total_lit = (float) centímetros_cub / 1000;
+         return total_lit;
+
+        } 
+        //mensaje en caso de error
+        catch (Exception e) {
+           return 0; 
+        }
+
 
   
    /*4.	Diseñe un algoritmo e implemente la función Convertir_us_cops que reciba una cantidad entera de dólares 
@@ -42,7 +77,23 @@ public class Taller1 {
    y devuelve enteros, pueden ser grandes. Si hay algún error, retorne -1.
    */
    
-    
+    public static int Convertir_us_cops (int dólares){
+
+        try {
+            //declarar variables
+            int pesos = 0;
+            int taza_cambio = 4170;
+            //definir el modelo para la conversión 
+            pesos = taza_cambio * dólares;
+            return pesos; 
+
+            
+        } 
+        //en caso de error...
+        catch (Exception e) {
+            return -1;
+        }
+     }
   
    
    /*5.	Diseñe un algoritmo e implemente la función Convertir_cent_far que recibe la temperatura real en grados 
@@ -50,7 +101,20 @@ public class Taller1 {
    retorne 0.
    */
 
-          
+          public static double Convertir_cent_far (double centígrados) {
+
+      try {
+
+        double Fahrenheit = 32 + ( 9 * centígrados / 5); 
+        return Fahrenheit; 
+        
+      } 
+      catch (Exception e) {
+        return 0;
+      }
+
+
+   }
 
    
    /*6.	Diseñe un algoritmo e implemente la función Calcular_segs que recibirá el número de Días, el número de horas, 
@@ -58,14 +122,49 @@ public class Taller1 {
    Si hay algún error, devuelva -1.
    */
 
-   
+    public static int Calcular_segs (byte días, byte minutos, byte horas, byte segundos){
+
+        try {
+          int total_seg = (días *3600 *24) + (horas *3600) + (minutos *60) + (segundos);
+          return total_seg;
+        } 
+        catch (Exception e) {
+           return -1;
+        }
+
+    
+
+    }
 
    /*7.	Un usuario tiene un sistema de báscula para pesar camiones. Diseñe un algoritmo e implemente la función 
    Calcular_peso_carga que reciba un float con el peso total del camión cargado en toneladas y otro float con 
    lo que pesa el camión vacío en toneladas, y devuelva el peso neto de la carga en kilos y toneladas 
    en un string del tipo: "### kilos - ### toneladas". 
    Si hay algún error, devuelva en un string "Error en la función Calcular_peso_carga"*/
+    public static String Calcular_peso_carga (float peso_cargado, float peso_vacio){
+       
+      try {
+        
+        String peso_neto = "";
+        float peso_netoton = 0;
+        float peso_netokg = 0;
+        int tasa_en_kg = 1000;
 
+        peso_netoton = peso_cargado - peso_vacio;
+        peso_netokg = tasa_en_kg * peso_netoton;
+
+        peso_neto = peso_netokg + " kilos - " + peso_netoton + " toneladas";
+
+        return peso_neto;
+
+      } 
+      
+      catch (Exception e) {
+        return "Error en la función Calcular_peso_carga";
+      }
+
+    }
+   
    
 
    /*8.	Diseñe un algoritmo e implemente la función Calcular_horasxviaje que calcule y devuelva un float con las horas  
@@ -74,7 +173,18 @@ public class Taller1 {
    Si hay algún error, devuelva -1.
    */
 
-  
+ public static float Calcular_horasxviaje (String horas_destino, short distancia_Km, short velocidad){
+      
+    try {
+       float horas = 0;
+       horas = (float) (distancia_Km / velocidad);
+       return horas;
+    } 
+    catch (Exception e) {
+      return -1; 
+    }
+
+   }
    
    /*9.	Un avión necesita cargar combustible para cubrir sus rutas programadas en el día. 
    Cada 0.2 toneladas de combustible puede recorrer 60.8 Km en velocidad de crucero. 
@@ -86,8 +196,26 @@ public class Taller1 {
    
    Si hay algún error, devuelva -1.*/
 
-   
-   
+  public static float Calcular_combustible (int ruta_nro1, int ruta_nro2, int ruta_nro3, int ruta_nro4){
+
+     try {
+
+      float combust_total = 0;
+      final double combust_despegar = 1.2*4 , combus_dist =  0.2 / 60.8, combust_aterrizar = 1.4*4;
+      int dist_total = ruta_nro1 + ruta_nro2 + ruta_nro3 + ruta_nro4;
+
+      double combust_distan= dist_total * combus_dist;
+      combust_total= (float) (combust_distan + combust_despegar + combust_aterrizar);
+      
+      return combust_total;
+
+
+     } 
+     catch (Exception e) {
+       return -1;
+     }
+
+   }
    
    /*10. Diseñe un algoritmo e implemente la función Calcular_peso_luna que recibe un byte con el peso en la tierra en kilos
    y devuelve un double el equivalente de ese peso en la luna en Newtons. Utilice las siguientes fórmulas.
@@ -97,6 +225,20 @@ public class Taller1 {
    Si hay algún error, devuelva 0.
    */
    
-   
+   public static double Calcular_peso_luna (byte peso_enkg){
+
+    try {
+      double peso_tierra_new = peso_enkg * 9.81/2;
+      double peso_luna_new = peso_tierra_new * 0.165;
+      return peso_luna_new; 
+      
+
+    } 
+    catch (Exception e) {
+      return 0; 
+    }
+
+
+   }
    
 }
